@@ -39,10 +39,7 @@ const store = JSON.stringify({
 })
 
 const SearchBar = () => (
-  <Lunr
-    index={index}
-    store={store}
-  >
+  <Lunr index={index} store={store}>
     {({ results, setQuery }) => (
       <>
         <Formik
