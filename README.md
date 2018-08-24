@@ -39,7 +39,7 @@ const store = JSON.stringify({
 })
 
 const SearchBar = () => (
-  <LocalSearch
+  <Lunr
     index={index}
     store={store}
   >
@@ -78,7 +78,7 @@ const SearchBar = () => (
         </ul>
       </>
     )}
-  </LocalSearch>
+  </Lunr>
 )
 ```
 
