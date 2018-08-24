@@ -22,9 +22,9 @@ npm install --save react-lunr
 The following example renders a text input and queries the Lunr index on form
 submission.
 
-Note: `Formik` is used in the following example to handle form state, but is
-not required. As long as `setQuery` is called with a string, you can manage how
-you call it.
+Note: [Formik][formik] is used in the following example to handle form state,
+but is not required. As long as `setQuery` is called with a string, you can
+manage how you call it.
 
 ```js
 import React from 'react'
@@ -96,3 +96,4 @@ The `children` prop will receive the following variables:
 
 [lunr]: https://lunrjs.com/
 [render-props]: https://reactjs.org/docs/render-props.html
+[formik]: https://github.com/jaredpalmer/formik
