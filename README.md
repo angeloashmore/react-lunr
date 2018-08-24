@@ -19,7 +19,7 @@ npm install --save react-lunr
 
 ## Example
 
-The following example renders an text input and queries the Lunr index on form
+The following example renders a text input and queries the Lunr index on form
 submission.
 
 Note: `Formik` is used in the following example to handle form state, but is
