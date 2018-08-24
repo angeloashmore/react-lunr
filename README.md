@@ -81,11 +81,11 @@ const SearchBar = () => (
 
 ## Props
 
-| Name               | Type     | Description                                                                            |
-| ------------------ | -------- | -------------------------------------------------------------------------------------- |
-| **`index`**        | `String` | **Required**. Lunr index passed that has already been passed through `JSON.stringify`. |
-| **`store`**        | `String` | **Required**. Object mapping a result `ref` to an object of data.                      |
-| **`initialQuery`** | `String` | The initial search query. Default: empty string.                                       |
+| Name               | Type     | Description                                                                     |
+| ------------------ | -------- | ------------------------------------------------------------------------------- |
+| **`index`**        | `String` | **Required**. Lunr index that has already been passed through `JSON.stringify`. |
+| **`store`**        | `String` | **Required**. Object mapping a result `ref` to an object of data.               |
+| **`initialQuery`** | `String` | The initial search query. Default: empty string.                                |
 
 The `children` prop will receive the following variables:
 
