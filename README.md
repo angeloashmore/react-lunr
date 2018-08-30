@@ -91,6 +91,7 @@ The `children` prop will receive the following variables:
 
 | Name           | Type            | Description                                |
 | -------------- | --------------- | ------------------------------------------ |
+| **`query`**    | `String`        | The search query.                          |
 | **`setQuery`** | `Function`      | Function to set the search query.          |
 | **`results`**  | `Array<Object>` | Array of results with data from the store. |
 

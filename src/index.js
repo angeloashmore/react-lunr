@@ -38,6 +38,7 @@ export class Lunr extends React.Component {
 
   render() {
     return this.props.children({
+      query: this.state.query,
       setQuery: this.setQuery,
       results: this.search(this.state.query),
     })
