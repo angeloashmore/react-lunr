@@ -15,6 +15,12 @@ export class Lunr extends React.Component {
     initialQuery: '',
   }
 
+  static getDerivedStateFromProps(props, state) {
+    return {
+      query: props.query,
+    }
+  }
+
   constructor(props) {
     super(props)
 
