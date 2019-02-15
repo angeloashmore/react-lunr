@@ -18,7 +18,7 @@ export const useLunr = (query, stringifiedIndex, stringifiedStore) => {
 
   useEffect(
     () => {
-      if (!query) setResults([])
+      if (!query || !index || !store) setResults([])
 
       const lunrResults = index.search(query)
       const mappedResults = results.map(({ ref }) => store[ref])
