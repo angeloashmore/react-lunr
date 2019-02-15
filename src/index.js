@@ -1,7 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import lunr from 'lunr'
 import memoize from 'memoize-one'
+
+export const useLunr = (query, stringifiedIndex, stringifiedStore) => {
+  const [index, setIndex] = useState(null)
+  const [store, setStore] = useState(null)
+  const [results, setResults] = useState([])
+
+  useEffect(() => {
+    const parsedIndex = JSON.parse(stringifiedIndex)
+    setIndex(lunr.Index.load(parsedIndex))
+
+    const parsedStore = JSON.parse(stringifiedStore)
+    setStore(parsedStore)
+  }, [])
+
+  useEffect(
+    () => {
+      if (!query) setResults([])
+
+      const lunrResults = index.search(query)
+      const mappedResults = results.map(({ ref }) => store[ref])
+      setResults(mappedResults)
+    },
+    [query],
+  )
+
+  return results
+}
 
 export class Lunr extends React.Component {
   static propTypes = {
