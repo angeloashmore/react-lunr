@@ -1,11 +1,6 @@
 # react-lunr
 
-React component to search a [Lunr][lunr] index. The Lunr index and data store
-is provided as a string from `JSON.stringify`.
-
-This component uses the [Render Props][render-props] pattern and does not
-handle any rendering for you. Instead, it provides the data and functions
-needed to manage your UI.
+React hook and component to search a [Lunr][lunr] index.
 
 ## Status
 
@@ -17,19 +12,91 @@ needed to manage your UI.
 npm install --save react-lunr
 ```
 
-## Example
+## API
+
+### `useLunr` hook
+
+The `useLunr` [hook][hooks] takes your search query, index, and store and returns
+results as an array. Searches are memoized to ensure efficient searching.
+
+#### Example
 
 The following example renders a text input and queries the Lunr index on form
 submission.
 
 Note: [Formik][formik] is used in the following example to handle form state,
-but is not required. As long as `setQuery` is called with a string, you can
-manage how you call it.
+but is not required. As long as your query is passed as the first parameter,
+you can manage how to store it.
+
+```js
+import React, { useState } from 'react'
+import { useLunr } from 'react-lunr'
+import { Formik, Form, Field } from 'formik'
+
+const index = JSON.stringify(/* a lunr index */)
+const store = JSON.stringify({
+  1: { id: 1, title: 'Document 1' },
+  2: { id: 2, title: 'Document 2' },
+  3: { id: 3, title: 'Document 3' },
+})
+
+const SearchBar = () => {
+  const [query, setQuery] = useState(null)
+  const results = useLunr(query, index, store)
+
+  return (
+    <Formik
+      initialValues={{ query: '' }}
+      onSubmit={(values, { setSubmitting }) => {
+        setQuery(values.query)
+        setSubmitting(false)
+      }}
+    >
+      <Form>
+        <Field name="query" />
+      </Form>
+      <h1>Results</h1>
+      <ul>
+        {results.map(result => (
+          <li key={result.id}>{result.title}</li>
+        ))}
+      </ul>
+    </Formik>
+  )
+}
+```
+
+#### Parameters
+
+```js
+useLunr(query: String, index: String!, store: String!) => Object[]
+```
+
+| Name        | Type     | Description                                                                |
+| ----------- | -------- | -------------------------------------------------------------------------- |
+| **`query`** | `String` | The search query. As this value updates, the return value will be updated. |
+| **`index`** | `String` | Lunr index that has already been passed through `JSON.stringify`.          |
+| **`store`** | `String` | Object mapping a result `ref` to an object of data.                        |
+
+### `Lunr` component
+
+The `Lunr` component uses the [Render Props][render-props] pattern and does not
+handle any rendering for you. Instead, it provides the data and functions
+needed to manage your UI.
+
+#### Example
+
+The following example renders a text input and queries the Lunr index on form
+submission.
+
+Note: [Formik][formik] is used in the following example to handle form state,
+but is not required. As long as your query is passed via `setQuery` or with the
+`query` prop, you can manage how to provide it.
 
 ```js
 import React from 'react'
 import { Lunr } from 'react-lunr'
-import { Formik } from 'formik'
+import { Formik, Form, Field } from 'formik'
 
 const index = JSON.stringify(/* a lunr index */)
 const store = JSON.stringify({
@@ -41,45 +108,29 @@ const store = JSON.stringify({
 const SearchBar = () => (
   <Lunr index={index} store={store}>
     {({ results, setQuery }) => (
-      <>
-        <Formik
-          initialValues={{ query: '' }}
-          onSubmit={(values, { setSubmitting }) => {
-            setQuery(values.query)
-            setSubmitting(false)
-          }}
-          render={({
-            values,
-            handleSubmit,
-            handleChange,
-            handleBlur,
-            isSubmitting,
-            touched,
-            setTouched,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <input
-                name="query"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.query}
-              />
-            </form>
-          )}
-        />
+      <Formik
+        initialValues={{ query: '' }}
+        onSubmit={(values, { setSubmitting }) => {
+          setQuery(values.query)
+          setSubmitting(false)
+        }}
+      >
+        <Form>
+          <Field name="query" />
+        </Form>
         <h1>Results</h1>
         <ul>
           {results.map(result => (
             <li key={result.id}>{result.title}</li>
           ))}
         </ul>
-      </>
+      </Formik>
     )}
   </Lunr>
 )
 ```
 
-## Props
+#### Props
 
 | Name        | Type     | Description                                                                                                  |
 | ----------- | -------- | ------------------------------------------------------------------------------------------------------------ |
@@ -97,4 +148,5 @@ The `children` prop will receive the following variables:
 
 [lunr]: https://lunrjs.com/
 [render-props]: https://reactjs.org/docs/render-props.html
+[hooks]: https://reactjs.org/docs/hooks-intro.html
 [formik]: https://github.com/jaredpalmer/formik
