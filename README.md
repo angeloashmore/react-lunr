@@ -16,8 +16,20 @@ npm install --save react-lunr
 
 ### `useLunr` hook
 
+```js
+useLunr(query: String, index: String!, store: String!) => Object[]
+```
+
 The `useLunr` [hook][hooks] takes your search query, index, and store and returns
 results as an array. Searches are memoized to ensure efficient searching.
+
+#### Parameters
+
+| Name        | Type     | Description                                                                                                 |
+| ----------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| **`query`** | `String` | The search query. As this value updates, the return value will be updated.                                  |
+| **`index`** | `String` | Lunr index that has already been passed through `JSON.stringify`.                                           |
+| **`store`** | `String` | Object mapping a result `ref` to an object of data that has already been passed through `JSON.stringified`. |
 
 #### Example
 
@@ -66,23 +78,29 @@ const SearchBar = () => {
 }
 ```
 
-#### Parameters
-
-```js
-useLunr(query: String, index: String!, store: String!) => Object[]
-```
-
-| Name        | Type     | Description                                                                |
-| ----------- | -------- | -------------------------------------------------------------------------- |
-| **`query`** | `String` | The search query. As this value updates, the return value will be updated. |
-| **`index`** | `String` | Lunr index that has already been passed through `JSON.stringify`.          |
-| **`store`** | `String` | Object mapping a result `ref` to an object of data.                        |
+---
 
 ### `Lunr` component
 
 The `Lunr` component uses the [Render Props][render-props] pattern and does not
 handle any rendering for you. Instead, it provides the data and functions
 needed to manage your UI.
+
+#### Props
+
+| Name        | Type     | Description                                                                                                  |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| **`index`** | `String` | **Required**. Lunr index that has already been passed through `JSON.stringify`.                              |
+| **`store`** | `String` | **Required**. Object mapping a result `ref` to an object of data.                                            |
+| **`query`** | `String` | The search query. As this value updates, the `results` children prop will be updated. Default: empty string. |
+
+The `children` prop will receive the following variables:
+
+| Name           | Type            | Description                                |
+| -------------- | --------------- | ------------------------------------------ |
+| **`query`**    | `String`        | The search query.                          |
+| **`setQuery`** | `Function`      | Function to set the search query.          |
+| **`results`**  | `Array<Object>` | Array of results with data from the store. |
 
 #### Example
 
@@ -129,22 +147,6 @@ const SearchBar = () => (
   </Lunr>
 )
 ```
-
-#### Props
-
-| Name        | Type     | Description                                                                                                  |
-| ----------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| **`index`** | `String` | **Required**. Lunr index that has already been passed through `JSON.stringify`.                              |
-| **`store`** | `String` | **Required**. Object mapping a result `ref` to an object of data.                                            |
-| **`query`** | `String` | The search query. As this value updates, the `results` children prop will be updated. Default: empty string. |
-
-The `children` prop will receive the following variables:
-
-| Name           | Type            | Description                                |
-| -------------- | --------------- | ------------------------------------------ |
-| **`query`**    | `String`        | The search query.                          |
-| **`setQuery`** | `Function`      | Function to set the search query.          |
-| **`results`**  | `Array<Object>` | Array of results with data from the store. |
 
 [lunr]: https://lunrjs.com/
 [render-props]: https://reactjs.org/docs/render-props.html
