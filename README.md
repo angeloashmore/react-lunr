@@ -1,7 +1,6 @@
 # react-lunr
 
-React hook and component to search a [Lunr][lunr] index. The Lunr index and
-data store should be provided as a string from `JSON.stringify`.
+React hook and component to search a [Lunr][lunr] index.
 
 ## Status
 
