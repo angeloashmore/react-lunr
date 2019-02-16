@@ -25,8 +25,8 @@ The following example renders a text input and queries the Lunr index on form
 submission.
 
 Note: [Formik][formik] is used in the following example to handle form state,
-but is not required. As long as your string query is passed via `setQuery` or
-with the `query` prop, you can manage how to provide it.
+but is not required. As long as your query is passed as the first parameter,
+you can manage how to store it.
 
 ```js
 import React, { useState } from 'react'
@@ -90,8 +90,8 @@ The following example renders a text input and queries the Lunr index on form
 submission.
 
 Note: [Formik][formik] is used in the following example to handle form state,
-but is not required. As long as your string query is passed via `setQuery` or
-with the `query` prop, you can manage how to provide it.
+but is not required. As long as your query is passed via `setQuery` or with the
+`query` prop, you can manage how to provide it.
 
 ```js
 import React from 'react'
