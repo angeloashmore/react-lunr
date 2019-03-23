@@ -25,11 +25,11 @@ results as an array. Searches are memoized to ensure efficient searching.
 
 #### Parameters
 
-| Name        | Type                  | Description                                                                                                                           |
-| ----------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **`query`** | `String`              | The search query. As this value updates, the return value will be updated.                                                            |
-| **`index`** | `lunr.Index | String` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `JSON.stringify`.                           |
-| **`store`** | `Object | String`     | Object mapping a result `ref` to an object of data. This can be an object or an object that has been exported via `JSON.stringified`. |
+| Name        | Type                   | Description                                                                                                                           |
+| ----------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **`query`** | `String`               | The search query. As this value updates, the return value will be updated.                                                            |
+| **`index`** | `lunr.Index \| String` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `JSON.stringify`.                           |
+| **`store`** | `Object \| String`     | Object mapping a result `ref` to an object of data. This can be an object or an object that has been exported via `JSON.stringified`. |
 
 #### Example
 
@@ -88,11 +88,11 @@ needed to manage your UI.
 
 #### Props
 
-| Name        | Type                  | Description                                                                                                                           |
-| ----------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **`query`** | `String`              | The search query. As this value updates, the `results` children prop will be updated. Default: empty string.                          |
-| **`index`** | `lunr.Index | String` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `JSON.stringify`.                           |
-| **`store`** | `Object | String`     | Object mapping a result `ref` to an object of data. This can be an object or an object that has been exported via `JSON.stringified`. |
+| Name        | Type                   | Description                                                                                                                           |
+| ----------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **`query`** | `String`               | The search query. As this value updates, the `results` children prop will be updated. Default: empty string.                          |
+| **`index`** | `lunr.Index \| String` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `JSON.stringify`.                           |
+| **`store`** | `Object \| String`     | Object mapping a result `ref` to an object of data. This can be an object or an object that has been exported via `JSON.stringified`. |
 
 The `children` prop will receive the following variables:
 
