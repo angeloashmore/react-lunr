@@ -17,7 +17,7 @@ npm install --save react-lunr
 ### `useLunr` hook
 
 ```js
-useLunr(query: String, index: String!, store: String!) => Object[]
+useLunr(query: String, index: lunr.Index! | String!, store: Object! | String!) => Object[]
 ```
 
 The `useLunr` [hook][hooks] takes your search query, index, and store and returns
@@ -25,11 +25,11 @@ results as an array. Searches are memoized to ensure efficient searching.
 
 #### Parameters
 
-| Name        | Type     | Description                                                                                                 |
-| ----------- | -------- | ----------------------------------------------------------------------------------------------------------- |
-| **`query`** | `String` | The search query. As this value updates, the return value will be updated.                                  |
-| **`index`** | `String` | Lunr index that has already been passed through `JSON.stringify`.                                           |
-| **`store`** | `String` | Object mapping a result `ref` to an object of data that has already been passed through `JSON.stringified`. |
+| Name        | Type                  | Description                                                                                                                           |
+| ----------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **`query`** | `String`              | The search query. As this value updates, the return value will be updated.                                                            |
+| **`index`** | `lunr.Index | String` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `JSON.stringify`.                           |
+| **`store`** | `Object | String`     | Object mapping a result `ref` to an object of data. This can be an object or an object that has been exported via `JSON.stringified`. |
 
 #### Example
 
@@ -45,12 +45,12 @@ import React, { useState } from 'react'
 import { useLunr } from 'react-lunr'
 import { Formik, Form, Field } from 'formik'
 
-const index = JSON.stringify(/* a lunr index */)
-const store = JSON.stringify({
+const index = /* a lunr index */
+const store = {
   1: { id: 1, title: 'Document 1' },
   2: { id: 2, title: 'Document 2' },
   3: { id: 3, title: 'Document 3' },
-})
+}
 
 const SearchBar = () => {
   const [query, setQuery] = useState(null)
@@ -88,11 +88,11 @@ needed to manage your UI.
 
 #### Props
 
-| Name        | Type     | Description                                                                                                  |
-| ----------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| **`index`** | `String` | **Required**. Lunr index that has already been passed through `JSON.stringify`.                              |
-| **`store`** | `String` | **Required**. Object mapping a result `ref` to an object of data.                                            |
-| **`query`** | `String` | The search query. As this value updates, the `results` children prop will be updated. Default: empty string. |
+| Name        | Type                  | Description                                                                                                                           |
+| ----------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **`query`** | `String`              | The search query. As this value updates, the `results` children prop will be updated. Default: empty string.                          |
+| **`index`** | `lunr.Index | String` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `JSON.stringify`.                           |
+| **`store`** | `Object | String`     | Object mapping a result `ref` to an object of data. This can be an object or an object that has been exported via `JSON.stringified`. |
 
 The `children` prop will receive the following variables:
 
@@ -116,12 +116,12 @@ import React from 'react'
 import { Lunr } from 'react-lunr'
 import { Formik, Form, Field } from 'formik'
 
-const index = JSON.stringify(/* a lunr index */)
-const store = JSON.stringify({
+const index = /* a lunr index */
+const store = {
   1: { id: 1, title: 'Document 1' },
   2: { id: 2, title: 'Document 2' },
   3: { id: 3, title: 'Document 3' },
-})
+}
 
 const SearchBar = () => (
   <Lunr index={index} store={store}>
