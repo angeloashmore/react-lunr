@@ -28,8 +28,13 @@ export class Lunr extends React.Component {
       query: props.initialQuery,
     }
 
-    this.index = lunr.Index.load(JSON.parse(props.index))
-    this.store = JSON.parse(props.store)
+    this.index =
+      typeof props.index === 'string'
+        ? lunr.Index.load(JSON.parse(props.index))
+        : props.index
+
+    this.store =
+      typeof props.store === 'string' ? JSON.parse(props.store) : props.store
   }
 
   setQuery = query => this.setState({ query })
