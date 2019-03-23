@@ -6,8 +6,8 @@ import memoize from 'memoize-one'
 export class Lunr extends React.Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
-    index: PropTypes.string.isRequired,
-    store: PropTypes.string.isRequired,
+    index: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+    store: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
     initialQuery: PropTypes.string,
   }
 

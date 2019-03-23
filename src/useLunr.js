@@ -8,25 +8,31 @@ const InvalidStoreError = Error(
   'Lunr store could not be parsed. Check that your store exists and is valid.',
 )
 
-export const useLunr = (query, stringifiedIndex, stringifiedStore) => {
+export const useLunr = (query, providedIndex, providedStore) => {
   const [index, setIndex] = useState(null)
   const [store, setStore] = useState(null)
 
   useEffect(() => {
-    if (!stringifiedIndex) throw InvalidIndexError
-    const parsedIndex = JSON.parse(stringifiedIndex)
-    if (!parsedIndex) throw InvalidIndexError
+    const processedIndex =
+      typeof providedIndex === 'string'
+        ? lunr.Index.load(JSON.parse(providedIndex))
+        : providedIndex
 
-    setIndex(lunr.Index.load(parsedIndex))
-  }, [stringifiedIndex])
+    if (!processedIndex) throw InvalidIndexError
+
+    setIndex(processedIndex)
+  }, [providedIndex])
 
   useEffect(() => {
-    if (!stringifiedStore) throw InvalidStoreError
-    const parsedStore = JSON.parse(stringifiedStore)
-    if (!parsedStore) throw InvalidStoreError
+    const processedStore =
+      typeof providedStore === 'string'
+        ? JSON.parse(providedStore)
+        : providedStore
 
-    setStore(parsedStore)
-  }, [stringifiedStore])
+    if (!processedStore) throw InvalidStoreError
+
+    setStore(processedStore)
+  }, [providedStore])
 
   return useMemo(() => {
     if (!query || !index || !store) return []
