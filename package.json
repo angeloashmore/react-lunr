@@ -1,6 +1,6 @@
 {
   "name": "react-lunr",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "React component to search a Lunr index",
   "license": "MIT",
   "main": "dist/index.js",
