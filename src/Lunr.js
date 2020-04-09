@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import lunr from 'lunr'
 import memoize from 'memoize-one'
+import warning from 'tiny-warning'
 
 export class Lunr extends React.Component {
   static propTypes = {
@@ -23,6 +24,11 @@ export class Lunr extends React.Component {
 
   constructor(props) {
     super(props)
+
+    warning(
+      false,
+      "react-lunr's Lunr component is deprecated and will be removed in the next major release. Please migrate your application to the useLunr hook.",
+    )
 
     this.state = {
       query: props.initialQuery,
