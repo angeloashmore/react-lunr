@@ -30,7 +30,7 @@ searching.
 | Name        | Type                           | Description                                                                                                                           |
 | ----------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
 | **`query`** | `string`                       | The search query. As this value updates, the return value will be updated.                                                            |
-| **`index`** | `lunr.Index \| JSON \| string` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `index.toJSON` `JSON.stringify`.            |
+| **`index`** | `lunr.Index \| JSON \| string` | The Lunr index. This can be an instance of a Lunr index or one that has been exported via `index.toJSON` or `JSON.stringify`.         |
 | **`store`** | `JSON \| string`               | Object mapping a result `ref` to an object of data. This can be an object or an object that has been exported via `JSON.stringified`. |
 
 If `store` is not provided, the raw results data from Lunr will be returned
