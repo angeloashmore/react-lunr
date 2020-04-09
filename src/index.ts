@@ -11,20 +11,21 @@ export const useLunr = <T = unknown>(
   rawStore?: Store<T> | string,
 ) => {
   const index = useMemo(() => {
+    if (rawIndex === undefined || rawIndex === null) {
+      warning(
+        rawIndex !== undefined && rawIndex !== null,
+        'No index was provided. Results will always be empty.',
+      )
+      return
+    }
     if (rawIndex instanceof Index) return rawIndex
     if (typeof rawIndex === 'string') return Index.load(JSON.parse(rawIndex))
     if (typeof rawIndex === 'object') return Index.load(rawIndex)
 
-    warning(
-      rawIndex == undefined,
-      'No index was provided. Results will always be empty.',
-    )
     invariant(
-      rawIndex != undefined,
-      'Invalid index provided. Please provide a Lunr.Index or exported JSON or string index.',
+      false,
+      'Invalid index provided. Please provide an instance of Lunr.Index or exported JSON or string index.',
     )
-
-    return
   }, [rawIndex])
 
   const store = useMemo(() => {

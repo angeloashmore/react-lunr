@@ -91,4 +91,16 @@ describe('useLunr', () => {
     )
     expect(result.current).toEqual([documents[0]])
   })
+
+  test('returns empty results and warns if missing index', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const { result } = renderHook(() => useLunr(documents[0].name, undefined))
+    expect(result.current).toEqual([])
+    spy.mockRestore()
+  })
+
+  test('throws if invalid index', () => {
+    const { result } = renderHook(() => useLunr(documents[0].name, 0 as any))
+    expect(result.error.message).toMatch(/invalid index provided/i)
+  })
 })
