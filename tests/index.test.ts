@@ -23,12 +23,12 @@ const documents: Document[] = [
   },
 ]
 
-const index = lunr(function() {
+const index = lunr(function () {
   this.ref('name')
   this.field('name')
   this.field('text')
 
-  documents.forEach(doc => this.add(doc))
+  documents.forEach((doc) => this.add(doc))
 })
 
 const store = {
@@ -50,31 +50,35 @@ describe('useLunr', () => {
     const { result } = renderHook(() =>
       useLunr(documents[0].name, index, store),
     )
-    expect(result).toEqual([documents[0]])
+    expect(result.current).toEqual([documents[0]])
   })
 
   test('returns empty results if query has no matches', () => {
     const { result } = renderHook(() => useLunr('nomatches', index, store))
-    expect(result).toEqual([])
+    expect(result.current).toEqual([])
   })
 
   test('returns empty results if no query', () => {
     const { result } = renderHook(() => useLunr(undefined, index, store))
-    expect(result).toEqual([])
+    expect(result.current).toEqual([])
   })
 
   test('returns Lunr results if no store', () => {
-    const { result } = renderHook(() =>
-      useLunr(documents[0].name, index, store),
-    )
-    expect(result).toEqual([documents[0]])
+    const { result } = renderHook(() => useLunr(documents[0].name, index))
+    expect(result.current).toEqual([
+      {
+        matchData: { metadata: { lunr: { name: {} } } },
+        ref: 'Lunr',
+        score: 0.981,
+      },
+    ])
   })
 
   test('supports object index', () => {
     const { result } = renderHook(() =>
-      useLunr<Document>(documents[0].name, index.toJSON()),
+      useLunr<Document>(documents[0].name, index.toJSON(), store),
     )
-    expect(result).toEqual(null)
+    expect(result.current).toEqual([documents[0]])
   })
 
   test('supports stringified index and store', () => {
@@ -85,6 +89,6 @@ describe('useLunr', () => {
         JSON.stringify(store),
       ),
     )
-    expect(result).toEqual([documents[0]])
+    expect(result.current).toEqual([documents[0]])
   })
 })
