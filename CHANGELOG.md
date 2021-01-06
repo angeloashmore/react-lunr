@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/angeloashmore/react-lunr/compare/v1.0.0...v1.1.0) (2021-01-06)
+
+
+### Features
+
+* add ability to build query ([#9](https://github.com/angeloashmore/react-lunr/issues/9)) ([322dc88](https://github.com/angeloashmore/react-lunr/commit/322dc88c59f99b42317e4db6b4ce62b78c31c963))
+
 ## [1.0.0](https://github.com/angeloashmore/react-lunr/compare/v0.5.0...v1.0.0) (2020-04-09)
 
 
