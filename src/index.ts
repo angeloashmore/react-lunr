@@ -6,7 +6,7 @@ import invariant from 'tiny-invariant'
 type Store<T> = Record<string | number | symbol, T>
 
 export const useLunr = <T = unknown>(
-  query?: string,
+  query?: string | Index.QueryBuilder,
   rawIndex?: Index | object | string,
   rawStore?: Store<T> | string,
 ) => {
@@ -37,7 +37,8 @@ export const useLunr = <T = unknown>(
   return useMemo(() => {
     if (!query || !index) return []
 
-    const results = index.search(query)
+    const results =
+      typeof query === 'string' ? index.search(query) : index.query(query)
 
     if (store) return results.map(({ ref }) => store[ref])
 
