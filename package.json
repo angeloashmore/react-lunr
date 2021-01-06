@@ -30,7 +30,6 @@
   ],
   "author": "Angelo Ashmore",
   "dependencies": {
-    "invariant": "^2.2.4",
     "tiny-invariant": "^1.1.0",
     "tiny-warning": "^1.0.3"
   },
