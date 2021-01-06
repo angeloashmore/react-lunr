@@ -16,7 +16,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "react-hooks", "jsx-a11y"],
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
     "react/jsx-uses-vars": "error",
     "react/jsx-key": "error",
