@@ -104,7 +104,7 @@ describe('useLunr', () => {
     expect(result.error.message).toMatch(/invalid index provided/i)
   })
 
-  test.only('returns results if builded query has matches', () => {
+  test('returns results if builded query has matches', () => {
     const queryBuilder: lunr.Index.QueryBuilder = (q) => {
       q.term(documents[0].name.toLowerCase(), {})
     }
