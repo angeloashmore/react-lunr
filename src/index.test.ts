@@ -1,6 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useLunr } from '../src'
 import lunr from 'lunr'
+
+import { useLunr } from '../src'
 
 interface Document {
   name: string
